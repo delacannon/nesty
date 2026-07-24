@@ -264,6 +264,32 @@ export function addRoom(): void {
   useGameStore.setState({ curRoomId: id });
 }
 
+/**
+ * Delete a whole room. Destructive: also drops every exit in other rooms that
+ * pointed at it, and moves the game's start to the first remaining room if the
+ * start room was the one removed. Refuses to delete the last room (a game needs
+ * at least one). Undoable via snapshot.
+ */
+export function deleteRoom(id: string): void {
+  const s = useGameStore.getState();
+  if (s.game.rooms.length <= 1) return; // keep at least one room
+  if (!s.game.rooms.some((r) => r.id === id)) return;
+  s.snapshot();
+  s.mutateGame((g) => {
+    g.rooms = g.rooms.filter((r) => r.id !== id);
+    for (const r of g.rooms) r.exits = r.exits.filter((ex) => ex.destRoom !== id);
+    if (g.startRoom === id) g.startRoom = g.rooms[0]!.id;
+  });
+  const after = useGameStore.getState();
+  if (after.curRoomId === id) {
+    useGameStore.setState({
+      curRoomId: after.game.rooms[0]!.id,
+      selEntity: null,
+      pendingExit: null,
+    });
+  }
+}
+
 export function ensureFrame2(frames: Frame16[]): void {
   if (frames.length < 2) frames.push(frames[0] ? [...frames[0]] : blankFrame());
 }

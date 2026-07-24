@@ -3,7 +3,8 @@ import { CondEditor, CondPicker } from '../components/CondPicker';
 import { paletteFor } from '../draw';
 import { EventsPanel } from '../panels/EventsPanel';
 import { LogicPanel } from '../panels/LogicPanel';
-import { currentRoom, useGameStore, type SelEntity } from '../store/gameStore';
+import { confirmAction } from '../store/confirmStore';
+import { currentRoom, deleteRoom, useGameStore, type SelEntity } from '../store/gameStore';
 
 type Tab = 'room' | 'events' | 'logic';
 
@@ -247,6 +248,32 @@ export function RoomProps() {
               </div>
             </div>
           )}
+
+          <div className='insp-section'>
+            <div className='sec-title'>Danger zone</div>
+            <button
+              className='danger'
+              disabled={game.rooms.length <= 1}
+              title={
+                game.rooms.length <= 1
+                  ? 'a game needs at least one room'
+                  : 'delete this whole room'
+              }
+              onClick={async () => {
+                const ok = await confirmAction({
+                  title: 'Delete room',
+                  message: `Delete room ${room.id}${
+                    room.name && room.name !== 'room ' + room.id ? ` "${room.name}"` : ''
+                  } and everything in it — tiles, sprites, exits, endings and events? Exits in other rooms that lead here are removed too. You can Undo this.`,
+                  confirmLabel: 'Delete room',
+                  danger: true,
+                });
+                if (ok) deleteRoom(room.id);
+              }}
+            >
+              Delete room
+            </button>
+          </div>
         </>
       )}
 
