@@ -3,11 +3,11 @@
 **Live:** [nesy.netlify.app](https://nesy.netlify.app/) · **Editor:** [nesy.netlify.app/editor](https://nesy.netlify.app/editor/) · by [delacannon](https://github.com/delacannon)
 
 A [Bitsy](https://make.bitsy.org)-style editor for making **real NES games**. Draw rooms, tiles,
-sprites and dialogs in the browser — the app compiles your game to 6502 assembly, assembles it
+sprites and dialogs in the browser , the app compiles your game to 6502 assembly, assembles it
 in-browser into an iNES ROM (NROM, 32KB PRG + 8KB CHR), and lets you play-test it on an embedded
 emulator. Download the `.nes` for any emulator or flash cart, and the generated `.asm` to study.
 
-Same spirit as Bitsy: walk around, talk to people, pick up things, be somewhere. No physics —
+Same spirit as Bitsy: walk around, talk to people, pick up things, be somewhere. No physics ,
 instant grid movement, one screen per room.
 
 ## Screenshots
@@ -33,12 +33,12 @@ Enter starts), **data** tab to import/export the game as text (`load sample` for
 
 ## What a game is
 
-- Rooms: 16×15 grid of 16×16px cells — exactly one NES screen (256×240)
+- Rooms: 16×15 grid of 16×16px cells , exactly one NES screen (256×240)
 - Tiles: 16×16, 3 colors + backdrop, optional wall flag + 2-frame animation
 - Avatar / sprites / items: 16×16 metasprites (2×2 hardware sprites), 2-frame animation
 - Dialogs: paged text box (28 cols × 2 lines), uppercase 8×8 font
 - Exits teleport between rooms; endings show a dialog and stop the game
-- Palettes: real NES palettes — backdrop + 4 BG + 4 sprite sub-palettes per set, one BG
+- Palettes: real NES palettes , backdrop + 4 BG + 4 sprite sub-palettes per set, one BG
   sub-palette per cell (matches NES attribute granularity)
 
 Budgets (enforced live in the status bar): ≤24 rooms, ≤62 tiles, ≤15 sprites+items per room,
@@ -50,7 +50,7 @@ Budgets (enforced live in the status bar): ≤24 rooms, ≤62 tiles, ≤15 sprit
 | ------------------- | -------------------------------------------------------------------------------------------------------------- |
 | `packages/asm6502`  | two-pass 6502 assembler in TS (all 151 official opcodes, `.org/.byte/.word/.res`, expressions)                 |
 | `packages/core`     | game data model, text format parse/serialize, validation, NES master palette                                   |
-| `packages/compiler` | `engine/engine.asm` (the generic runtime), CHR generation, data table codegen, iNES builder — `buildRom(game)` |
+| `packages/compiler` | `engine/engine.asm` (the generic runtime), CHR generation, data table codegen, iNES builder , `buildRom(game)` |
 | `apps/editor`       | Vite + React editor with jsnes play-testing                                                                    |
 
 ## Game data text format
@@ -98,15 +98,26 @@ pickup with taken-flags, exits, endings) → paged dialog box with a typewriter 
 lock. Tile animation flips every 32 frames through a vram write buffer that never overruns
 vblank. Room loads write the full nametable + attributes + palettes with rendering off.
 
-The downloadable `.asm` is the complete engine plus your game as commented data tables —
+The downloadable `.asm` is the complete engine plus your game as commented data tables ,
 assemble it yourself with the bundled assembler or ca65 (with minor directive tweaks).
 
 ## Testing
 
 - assembler: hand-typed fixture of all 151 opcodes → exact bytes
 - compiler: golden ROM SHA-256 (`UPDATE_GOLDENS=1 pnpm test` after intentional engine changes)
-- engine: headless jsnes scenarios — boot, walk, collide, talk, pick up, exit, ending —
+- engine: headless jsnes scenarios , boot, walk, collide, talk, pick up, exit, ending ,
   asserting engine RAM via the assembler symbol table
+
+## Thanks & inspirations
+
+NESty stands on the shoulders of two projects that made "anyone can make a game" real:
+
+- **[Bitsy](https://make.bitsy.org)** by **Adam Le Doux** , the whole spirit of NESty. Walk
+  around, talk to people, pick up things, be somewhere. Tiny games, huge heart.
+- **[GB Studio](https://www.gbstudio.dev/)** by **Chris Maltby** , proof that a friendly editor
+  can target real retro hardware, and a north star for the editor's shape and polish.
+
+Thank you both. ♥
 
 ## Notes / limits (v1)
 
