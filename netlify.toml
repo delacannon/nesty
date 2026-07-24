@@ -13,6 +13,25 @@
   NODE_VERSION = "22"
   NETLIFY_USE_PNPM = "true"
 
+# ---- Free SEO build plugins (auto-installed by Netlify) ----
+
+# Generates /sitemap.xml from the published HTML on every deploy.
+[[plugins]]
+  package = "@netlify/plugin-sitemap"
+  [plugins.inputs]
+    buildDir = "apps/web/dist"
+    exclude = ["apps/web/dist/editor/play.html"]
+
+# After a successful production deploy, pings the search engines to (re)crawl
+# the sitemap — free, no API keys.
+[[plugins]]
+  package = "netlify-plugin-submit-sitemap"
+  [plugins.inputs]
+    baseUrl = "https://nesy.netlify.app"
+    sitemapPath = "/sitemap.xml"
+    ignorePeriod = 0
+    providers = ["google", "bing", "yandex"]
+
 # Long-cache the fingerprinted build assets (hashed filenames).
 [[headers]]
   for = "/assets/*"

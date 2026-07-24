@@ -20,7 +20,9 @@
     "typecheck": "tsc -p packages/asm6502 --noEmit && tsc -p packages/core --noEmit && tsc -p packages/compiler --noEmit && tsc -p apps/editor && tsc -p apps/web"
   },
   "devDependencies": {
+    "@netlify/plugin-sitemap": "^0.8.1",
     "concurrently": "^9.1.0",
+    "netlify-plugin-submit-sitemap": "^0.4.0",
     "typescript": "^5.5.4",
     "vitest": "^2.0.5"
   }

@@ -117,8 +117,6 @@ NESty stands on the shoulders of two projects that made "anyone can make a game"
 - **[GB Studio](https://www.gbstudio.dev/)** by **Chris Maltby** , proof that a friendly editor
   can target real retro hardware, and a north star for the editor's shape and polish.
 
-Thank you both. ♥
-
 ## Notes / limits (v1)
 
 - Uppercase-only ASCII font (saves CHR space for art)

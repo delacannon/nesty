@@ -82,6 +82,7 @@
       <nav class="nav-links">
         <a href="#make">What it does</a>
         <a href="#editor">Editor</a>
+        <a href="#play">Play</a>
         <a href="#pipeline">Pipeline</a>
         <a href="#specs">Specs</a>
         <a href="#format">Format</a>
@@ -269,6 +270,46 @@
         <p class="shot-cta">
           <a class="btn primary big" data-editor-link href="/editor/">Try it yourself →</a>
         </p>
+      </section>
+
+      <!-- ============ PLAYABLE DEMO ============ -->
+      <section id="play" class="band alt">
+        <div class="band-head">
+          <h2>Play one right now</h2>
+          <p>
+            This is a real <code>.nes</code> ROM built with NESty, running on the jsnes
+            emulator in your browser — the same ROM you'd flash to a cartridge. Arrows
+            walk, <kbd>Z</kbd> talks, <kbd>Enter</kbd> starts.
+          </p>
+        </div>
+
+        <div class="nes-embed" id="nes-embed">
+          <div class="tv nes-tv">
+            <canvas class="nes-canvas" width="256" height="240" aria-label="Playable NES demo"></canvas>
+          </div>
+
+          <div class="nes-side">
+            <div class="nes-bar">
+              <button type="button" class="btn small" data-nes="sound">🔈 Sound off</button>
+              <button type="button" class="btn small" data-nes="reset">Start ⏎</button>
+            </div>
+
+            <!-- touch controls -->
+            <div class="nes-pad" aria-hidden="true">
+              <div class="dpad">
+                <button class="pad-btn up" data-btn="up">▲</button>
+                <button class="pad-btn left" data-btn="left">◀</button>
+                <button class="pad-btn right" data-btn="right">▶</button>
+                <button class="pad-btn down" data-btn="down">▼</button>
+              </div>
+              <div class="ab">
+                <button class="pad-btn ab-b" data-btn="b">B</button>
+                <button class="pad-btn ab-a" data-btn="a">A</button>
+              </div>
+            </div>
+            <p class="nes-hint">Click the screen to grab the controls.</p>
+          </div>
+        </div>
       </section>
 
       <!-- ============ PIPELINE ============ -->

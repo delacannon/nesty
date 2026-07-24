@@ -1,5 +1,9 @@
 import '@nesty/ui/index.css';
 import './site.css';
+import { mountNesEmbed } from './nesEmbed';
+
+const nesRoot = document.getElementById('nes-embed');
+if (nesRoot) void mountNesEmbed(nesRoot);
 
 // Editor lives at /editor/ in the combined production build. In dev the editor
 // runs on its own Vite server, so point the CTAs there instead.
