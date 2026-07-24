@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
+  "description": "NESty editor — Vite + React app that draws NES games and compiles them to .nes ROMs.",
+  "author": "Àlvar Amat (delacannon) <delacannon@gmail.com>",
+  "homepage": "https://nesy.netlify.app/editor/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

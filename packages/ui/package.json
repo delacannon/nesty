@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
+  "author": "Àlvar Amat (delacannon) <delacannon@gmail.com>",
   "exports": {
     "./tokens.css": "./tokens.css",
     "./components.css": "./components.css",

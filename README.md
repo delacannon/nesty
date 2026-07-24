@@ -1,5 +1,7 @@
 # NESty
 
+**Live:** [nesy.netlify.app](https://nesy.netlify.app/) · **Editor:** [nesy.netlify.app/editor](https://nesy.netlify.app/editor/) · by [delacannon](https://github.com/delacannon)
+
 A [Bitsy](https://make.bitsy.org)-style editor for making **real NES games**. Draw rooms, tiles,
 sprites and dialogs in the browser — the app compiles your game to 6502 assembly, assembles it
 in-browser into an iNES ROM (NROM, 32KB PRG + 8KB CHR), and lets you play-test it on an embedded
@@ -10,12 +12,12 @@ instant grid movement, one screen per room.
 
 ## Screenshots
 
-| World editor | Sprites |
-| --- | --- |
+| World editor                                            | Sprites                                                    |
+| ------------------------------------------------------- | ---------------------------------------------------------- |
 | ![World editor](apps/web/public/shots/editor-world.png) | ![Sprite editor](apps/web/public/shots/editor-sprites.png) |
 
-| Music | Dialog |
-| --- | --- |
+| Music                                                   | Dialog                                                    |
+| ------------------------------------------------------- | --------------------------------------------------------- |
 | ![Music editor](apps/web/public/shots/editor-music.png) | ![Dialog editor](apps/web/public/shots/editor-dialog.png) |
 
 ## Quick start

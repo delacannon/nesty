@@ -141,8 +141,18 @@ h4 {
 .nav-links a:hover {
   color: var(--ink);
 }
-.nav-cta {
+.nav-gh {
   margin-left: auto;
+  display: inline-flex;
+  align-items: center;
+  color: var(--ink-dim);
+  transition: color 90ms;
+}
+.nav-gh:hover {
+  color: var(--ink);
+}
+.nav-gh + .nav-cta {
+  margin-left: 16px;
 }
 
 /* ---------- HERO ---------- */

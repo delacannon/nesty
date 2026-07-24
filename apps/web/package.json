@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "type": "module",
+  "description": "NESty marketing site — landing page plus the /editor route.",
+  "author": "Àlvar Amat (delacannon) <delacannon@gmail.com>",
+  "homepage": "https://nesy.netlify.app/",
   "scripts": {
     "dev": "vite --port 5174",
     "build": "vite build",

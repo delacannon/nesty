@@ -44,7 +44,7 @@ export function TopToolbar() {
       <a
         className='logo'
         href={import.meta.env.DEV ? 'http://localhost:5174/' : '/'}
-        title='back to nesty.app'
+        title='back to home'
       >
         NES<em>TY</em>
       </a>

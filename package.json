@@ -2,6 +2,14 @@
   "name": "nesty",
   "private": true,
   "version": "0.1.0",
+  "description": "A Bitsy-style editor for making real NES games in the browser — compiles to a genuine .nes ROM.",
+  "author": "Àlvar Amat (delacannon) <delacannon@gmail.com>",
+  "license": "MIT",
+  "homepage": "https://nesy.netlify.app/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/delacannon/nesty.git"
+  },
   "packageManager": "pnpm@11.15.1",
   "scripts": {
     "test": "vitest run",

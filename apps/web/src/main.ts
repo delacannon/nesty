@@ -8,8 +8,8 @@ document.querySelectorAll<HTMLAnchorElement>('[data-editor-link]').forEach((a) =
   a.href = EDITOR_URL;
 });
 
-// Repo link — set once we have a public URL.
-const REPO_URL = 'https://github.com/';
+// Repo link (kept in sync in one place).
+const REPO_URL = 'https://github.com/delacannon/nesty';
 document.querySelectorAll<HTMLAnchorElement>('[data-repo]').forEach((a) => {
   a.href = REPO_URL;
 });
