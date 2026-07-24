@@ -1,0 +1,25 @@
+# Netlify deploy for the NESty site.
+# `pnpm build` produces one static folder: apps/web/dist
+#   /          -> landing page
+#   /editor/   -> the full editor (real folder, no rewrite needed)
+#   /editor/play.html -> standalone player
+
+[build]
+  command = "pnpm build"
+  publish = "apps/web/dist"
+
+[build.environment]
+  # Corepack picks up the pnpm version from package.json "packageManager".
+  NODE_VERSION = "22"
+  NETLIFY_USE_PNPM = "true"
+
+# Long-cache the fingerprinted build assets (hashed filenames).
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/editor/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

@@ -1,0 +1,19 @@
+{
+  "name": "nesty",
+  "private": true,
+  "version": "0.1.0",
+  "packageManager": "pnpm@11.15.1",
+  "scripts": {
+    "test": "vitest run",
+    "dev": "pnpm --filter @nesty/editor dev",
+    "dev:web": "pnpm --filter @nesty/web dev",
+    "dev:all": "concurrently -n web,editor -c magenta,cyan \"pnpm --filter @nesty/web dev\" \"pnpm --filter @nesty/editor dev\"",
+    "build": "pnpm --filter @nesty/web build && pnpm --filter @nesty/editor build",
+    "typecheck": "tsc -p packages/asm6502 --noEmit && tsc -p packages/core --noEmit && tsc -p packages/compiler --noEmit && tsc -p apps/editor && tsc -p apps/web"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0",
+    "typescript": "^5.5.4",
+    "vitest": "^2.0.5"
+  }
+}

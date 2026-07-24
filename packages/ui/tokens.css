@@ -1,0 +1,88 @@
+/* ============================================================
+   NESty design tokens — shared by the editor and the site.
+   Semantic CSS custom properties, remapped per theme via
+   <html data-theme="…">. Only these tokens change between
+   themes; every component reads them.
+   ============================================================ */
+
+:root {
+  /* ---- GB Studio dark theme tokens ---- */
+  --accent: #c92c61;
+  --accent-hi: #e0356e;
+  --accent-ink: #fff; /* text/icon colour that sits on an accent fill */
+  --bg: #444444; /* document / center canvas area */
+  --bg-panel: #222222; /* rails, panels, sidebars */
+  --bg-card: #3e4142; /* cards, toolbar body */
+  --bg-inset: #000000; /* inputs, wells */
+  --line: #000000; /* hard borders */
+  --line-bright: #3a3a3a; /* softer dividers */
+  --ink: #b7babb;
+  --ink-dim: #777777;
+  --shadow: #000;
+
+  /* chrome gradients */
+  --toolbar-grad: linear-gradient(to bottom, #3e4142 0%, #282a2a 100%);
+  --btn-grad: linear-gradient(to bottom, #9f9e9e 0%, #6a6d6e 6%, #616364 100%);
+  --btn-grad-hover: linear-gradient(
+    to bottom,
+    #b0afaf 0%,
+    #767a7b 6%,
+    #6b6e70 100%
+  );
+
+  /* legacy NES accent names kept as aliases so existing panel markup
+     (inline var(--cyan/red/gold/green) + component classes) keeps working */
+  --cyan: #3cbcfc;
+  --red: #e7005a;
+  --gold: #f8b800;
+  --green: #58d854;
+
+  --font-display: 'Press Start 2P', 'Courier New', monospace;
+  --font-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Ubuntu,
+    Cantarell, 'Helvetica Neue', sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'Courier New', monospace;
+
+  --r: 4px;
+}
+
+/* PC-98 salmon — NEC workstation vibe (the default theme). Salmon carries
+   actions, cyan carries state; selection tints one step up + accent edge. */
+[data-theme='pc98'] {
+  --accent: #f2837b;
+  --accent-hi: #ff9d94;
+  --accent-ink: #3a0f0b;
+  --bg: #14171f;
+  --bg-panel: #1d2230;
+  --bg-card: #29303f;
+  --bg-inset: #10131a;
+  --line: #38404f;
+  --line-bright: #4a5468;
+  --ink: #e6e8ef;
+  --ink-dim: #8891a3;
+  --cyan: #6fd0e0;
+  --green: #8fd6a0;
+  --toolbar-grad: linear-gradient(to bottom, #232838, #191d28);
+  --btn-grad: linear-gradient(to bottom, #333c4e, #2a3140);
+  --btn-grad-hover: linear-gradient(to bottom, #3d4759, #333b4c);
+}
+
+/* Amber CRT — monochrome phosphor. Single amber accent, warm greys. */
+[data-theme='amber'] {
+  --accent: #ffb454;
+  --accent-hi: #ffca7a;
+  --accent-ink: #241400;
+  --bg: #100c07;
+  --bg-panel: #18120b;
+  --bg-card: #221a0f;
+  --bg-inset: #0b0805;
+  --line: #3a2c19;
+  --line-bright: #574328;
+  --ink: #ffd9a0;
+  --ink-dim: #a9865a;
+  --cyan: #ffd9a0;
+  --green: #b7d06a;
+  --gold: #ffb454;
+  --toolbar-grad: linear-gradient(to bottom, #241a0e, #180f06);
+  --btn-grad: linear-gradient(to bottom, #33260f, #261b0b);
+  --btn-grad-hover: linear-gradient(to bottom, #3f2f14, #33260f);
+}

@@ -1,0 +1,100 @@
+/* ============================================================
+   NESty base components — shared by the editor and the site.
+   Reads tokens from tokens.css. Form controls + the glossy
+   retro-OS button system. Layout stays app-specific.
+   ============================================================ */
+
+/* ---------- form controls ---------- */
+button,
+select,
+input[type='text'],
+input[type='number'],
+textarea {
+  font-family: var(--font-body);
+  font-size: 12px;
+  color: var(--ink);
+  background: var(--bg-inset);
+  border: 1px solid var(--line-bright);
+  border-radius: var(--r);
+  padding: 4px 7px;
+}
+
+select {
+  cursor: pointer;
+}
+
+textarea {
+  width: 100%;
+  resize: vertical;
+  font-family: var(--font-mono);
+}
+
+input[type='text']:focus,
+input[type='number']:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+/* glossy retro-OS buttons */
+button {
+  cursor: pointer;
+  background: var(--btn-grad);
+  color: #fbfeff;
+  border: 1px solid #313334;
+  border-radius: var(--r);
+  padding: 5px 10px;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.08) inset;
+  transition:
+    filter 80ms,
+    background 80ms;
+  letter-spacing: 0.01em;
+}
+
+button:hover {
+  background: var(--btn-grad-hover);
+  color: #fff;
+}
+
+button:active {
+  background: #505252;
+}
+
+button:disabled {
+  opacity: 0.4;
+  cursor: default;
+  filter: grayscale(0.4);
+}
+
+button.primary {
+  background: linear-gradient(to bottom, var(--accent-hi), var(--accent));
+  border-color: #7a1a3c;
+  color: var(--accent-ink);
+}
+
+button.primary:hover {
+  filter: brightness(1.12);
+}
+
+/* active / toggled state = accent fill */
+button.on {
+  background: linear-gradient(to bottom, var(--accent-hi), var(--accent));
+  border-color: #7a1a3c;
+  color: var(--accent-ink);
+}
+
+button.danger {
+  background: linear-gradient(to bottom, #e8484f, #c62828);
+  border-color: #7a1414;
+  color: #fff;
+}
+
+button.danger:hover {
+  filter: brightness(1.12);
+}
+
+button.small {
+  padding: 3px 7px;
+  font-size: 11px;
+}

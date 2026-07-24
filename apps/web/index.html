@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="en" data-theme="pc98">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>NESty — Make Real NES Games in Your Browser</title>
+    <meta
+      name="description"
+      content="NESty is a browser game maker that compiles to a real NES cartridge. Draw rooms, sprites and dialog, wire up flags and events, add APU music — then export a .nes ROM that boots on Mesen, FCEUX and a flash cart."
+    />
+    <meta
+      name="keywords"
+      content="NES game maker, make NES games, .nes ROM export, homebrew NES, 6502 assembler, Bitsy NES, NROM, browser game editor, retro game creator, 8-bit"
+    />
+    <meta name="author" content="NESty" />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#14171f" />
+    <link rel="canonical" href="https://nesty.app/" />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/favicon.svg" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="NESty" />
+    <meta property="og:url" content="https://nesty.app/" />
+    <meta property="og:title" content="NESty — Make Real NES Games in Your Browser" />
+    <meta
+      property="og:description"
+      content="Draw a cave. Talk to a cat. Flash it to a cartridge. NESty compiles your game straight to 6502 and hands you a .nes that boots on real hardware."
+    />
+    <meta property="og:image" content="https://nesty.app/og-image.png" />
+    <meta property="og:image:alt" content="The NESty NES game editor" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="NESty — Make Real NES Games in Your Browser" />
+    <meta
+      name="twitter:description"
+      content="A browser game maker that outputs a real NES cartridge, not a save file. NROM, 32K PRG + 8K CHR, ca65-compatible .asm."
+    />
+    <meta name="twitter:image" content="https://nesty.app/og-image.png" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "NESty",
+        "description": "Browser game maker that compiles Bitsy-style games to real NES .nes ROMs.",
+        "url": "https://nesty.app/",
+        "applicationCategory": "GameApplication",
+        "operatingSystem": "Web",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+      }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=IBM+Plex+Mono:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- ============ NAV ============ -->
+    <header class="nav">
+      <a class="nav-logo" href="#top">NES<em>ty</em></a>
+      <nav class="nav-links">
+        <a href="#make">What it does</a>
+        <a href="#editor">Editor</a>
+        <a href="#pipeline">Pipeline</a>
+        <a href="#specs">Specs</a>
+        <a href="#format">Format</a>
+      </nav>
+      <a class="btn primary nav-cta" data-editor-link href="/editor/">Open the Editor</a>
+    </header>
+
+    <main id="top">
+      <!-- ============ HERO ============ -->
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="kicker">Browser game maker · real NES output</p>
+          <h1 class="hero-title">Make a game.<br />Get a&nbsp;cartridge.</h1>
+          <p class="lede">
+            Draw a cave. Talk to a cat. Flash it to a cartridge. NESty compiles your
+            game straight to 6502 and hands you a <code>.nes</code> that boots on real
+            hardware — no assembly required, none of it faked in an emulator wrapper.
+          </p>
+          <div class="hero-actions">
+            <a class="btn primary big" data-editor-link href="/editor/">Open the Editor →</a>
+            <a class="btn big" href="#pipeline">See how it builds</a>
+          </div>
+          <p class="hero-note">
+            Runs in the browser. Free. Draw → 6502 → assemble → <code>.nes</code>.
+          </p>
+        </div>
+        <div class="hero-art" aria-hidden="true">
+          <div class="tv">
+            <div class="screen">
+              <div class="scanlines"></div>
+              <div class="room">
+                <!-- a tiny hand-built "room": walls, a cat, the avatar -->
+                <div class="tile wall" style="grid-area: 1 / 1 / 2 / 17"></div>
+                <div class="tile wall" style="grid-area: 8 / 1 / 9 / 2"></div>
+                <div class="tile wall" style="grid-area: 8 / 16 / 9 / 17"></div>
+                <div class="tile floor" style="grid-area: 4 / 5 / 5 / 6"></div>
+                <div class="sprite cat" style="grid-area: 4 / 11 / 5 / 12">🐈‍⬛</div>
+                <div class="sprite hero" style="grid-area: 4 / 5 / 5 / 6">🧍</div>
+              </div>
+              <div class="dlgbox">
+                <span class="dlg-line">MEOW. THE CAVE IS DEEPER</span>
+                <span class="dlg-line">THAN IT LOOKS.<span class="caret">▾</span></span>
+              </div>
+            </div>
+          </div>
+          <p class="tv-tag">256 × 240 · one screen per room</p>
+        </div>
+      </section>
+
+      <!-- ============ MARQUEE ============ -->
+      <div class="marquee" aria-hidden="true">
+        <div class="marquee-track">
+          <span>NROM · MAPPER 0</span><span>◆</span>
+          <span>32K PRG + 8K CHR</span><span>◆</span>
+          <span>64-COLOR 2C02 PALETTE</span><span>◆</span>
+          <span>4-CHANNEL APU MUSIC</span><span>◆</span>
+          <span>ca65-COMPATIBLE .ASM</span><span>◆</span>
+          <span>MESEN · FCEUX · EVERDRIVE</span><span>◆</span>
+          <span>NROM · MAPPER 0</span><span>◆</span>
+          <span>32K PRG + 8K CHR</span><span>◆</span>
+          <span>64-COLOR 2C02 PALETTE</span><span>◆</span>
+          <span>4-CHANNEL APU MUSIC</span><span>◆</span>
+          <span>ca65-COMPATIBLE .ASM</span><span>◆</span>
+          <span>MESEN · FCEUX · EVERDRIVE</span><span>◆</span>
+        </div>
+      </div>
+
+      <!-- ============ WHAT IT DOES ============ -->
+      <section id="make" class="band">
+        <div class="band-head">
+          <h2>It's a real cartridge. Not a save file.</h2>
+          <p>
+            Same spirit as Bitsy: walk around, talk to people, pick up things, be
+            somewhere. No physics, no timers to fight — instant grid movement, one
+            screen per room. The difference is what comes out the other end. NESty
+            writes a hand-tuned 6502 engine, appends your game as data tables, and
+            assembles the whole thing into an authentic NROM ROM. Play it in the
+            built-in emulator, download the <code>.nes</code>, or burn it to an
+            EverDrive and boot it on a front-loader from 1985.
+          </p>
+        </div>
+
+        <div class="feature-grid">
+          <article class="card">
+            <span class="card-ico">🗺️</span>
+            <h3>Rooms &amp; tiles</h3>
+            <p>
+              Paint a 16×15 grid of 16×16 tiles — exactly one NES screen. Wall flags
+              for collision, 2-frame tile animation, exits that teleport between rooms.
+            </p>
+          </article>
+          <article class="card">
+            <span class="card-ico">🧍</span>
+            <h3>Sprites &amp; avatar</h3>
+            <p>
+              16×16 metasprites built from four hardware sprites. Directional avatar
+              art, a walk-cycle flip, NPCs and pickups you place per room.
+            </p>
+          </article>
+          <article class="card">
+            <span class="card-ico">💬</span>
+            <h3>Dialog</h3>
+            <p>
+              A paged text box, 28 columns by two lines, with a typewriter crawl you
+              can set from instant to turbo — and a per-character blip if you want one.
+            </p>
+          </article>
+          <article class="card">
+            <span class="card-ico">⚙️</span>
+            <h3>Logic that holds up</h3>
+            <p>
+              Flags and variables, conditions, room events that fire when you step on a
+              cell, tile overlays that swap art when a door opens. No scripting language
+              to learn — you wire it in the editor.
+            </p>
+          </article>
+          <article class="card">
+            <span class="card-ico">🎵</span>
+            <h3>Sound on the real APU</h3>
+            <p>
+              A Nanoloop-style tracker: 16-step patterns across four channels —
+              pulse 1, pulse 2, triangle, noise. Plus up to 32 custom sound effects you
+              trigger from events. It plays through the chip, not a sample.
+            </p>
+          </article>
+          <article class="card">
+            <span class="card-ico">🎬</span>
+            <h3>Transitions &amp; polish</h3>
+            <p>
+              Screen wipes between rooms — scroll, diagonal, fade, curtain, blinds.
+              Five fonts including katakana. Optional splash screen at boot.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <!-- ============ EDITOR SHOTS ============ -->
+      <section id="editor" class="band">
+        <div class="band-head">
+          <h2>Look inside</h2>
+          <p>
+            One window, no panels to hunt for. Paint a room, wire the logic, punch in a
+            song on the step grid, write the dialog — the ROM rebuilds as you go.
+          </p>
+        </div>
+        <figure class="shot shot-hero">
+          <img
+            src="/shots/editor-world.png"
+            alt="The NESty world editor: a room of tiles with a cat sprite, the tools rail, room tree and entity inspector"
+            loading="lazy"
+            width="2880"
+            height="1514"
+          />
+          <figcaption>World editor — paint the room, place NPCs, exits and endings.</figcaption>
+        </figure>
+        <div class="shot-grid">
+          <figure class="shot">
+            <img
+              src="/shots/editor-music.png"
+              alt="The NESty music tracker with a 16-step note grid across four channels"
+              loading="lazy"
+              width="2880"
+              height="1514"
+            />
+            <figcaption>Music — a 16-step tracker across four APU channels.</figcaption>
+          </figure>
+          <figure class="shot">
+            <img
+              src="/shots/editor-dialog.png"
+              alt="The NESty dialogue editor showing a text box preview and the list of all dialogs"
+              loading="lazy"
+              width="2880"
+              height="1514"
+            />
+            <figcaption>Dialogue — write it, see the NES text box render live.</figcaption>
+          </figure>
+        </div>
+        <p class="shot-cta">
+          <a class="btn primary big" data-editor-link href="/editor/">Try it yourself →</a>
+        </p>
+      </section>
+
+      <!-- ============ PIPELINE ============ -->
+      <section id="pipeline" class="band alt">
+        <div class="band-head">
+          <h2>What happens when you hit Play</h2>
+          <p>
+            No native toolchain, no download, no account. The whole compiler runs in
+            the tab you already have open.
+          </p>
+        </div>
+        <ol class="pipeline">
+          <li>
+            <span class="step-n">1</span>
+            <h3>Draw</h3>
+            <p>Rooms, tiles, sprites, dialog, palettes, songs — in the editor.</p>
+          </li>
+          <li class="arrow" aria-hidden="true">→</li>
+          <li>
+            <span class="step-n">2</span>
+            <h3>Compile to 6502</h3>
+            <p>Your game becomes commented assembly against the NESty engine.</p>
+          </li>
+          <li class="arrow" aria-hidden="true">→</li>
+          <li>
+            <span class="step-n">3</span>
+            <h3>Assemble</h3>
+            <p>A two-pass 6502 assembler builds an iNES ROM, right in the browser.</p>
+          </li>
+          <li class="arrow" aria-hidden="true">→</li>
+          <li>
+            <span class="step-n">4</span>
+            <h3>Play it</h3>
+            <p>Boots on the embedded emulator. Download the <code>.nes</code>. Flash it.</p>
+          </li>
+        </ol>
+        <p class="pipeline-foot">
+          The <code>.asm</code> you download is the complete engine plus your game as
+          readable data tables. Assemble it again with the bundled assembler or with
+          <strong>ca65</strong> — it's yours to study and hack.
+        </p>
+      </section>
+
+      <!-- ============ SPECS ============ -->
+      <section id="specs" class="band">
+        <div class="band-head">
+          <h2>The fine print, because it matters</h2>
+          <p>
+            NESty models the real machine, not a loose approximation. When something
+            won't fit on hardware, the editor tells you before you flash it.
+          </p>
+        </div>
+
+        <div class="spec-cols">
+          <table class="spec">
+            <caption>Cartridge</caption>
+            <tbody>
+              <tr><th>Mapper</th><td>0 — NROM, horizontal mirroring</td></tr>
+              <tr><th>PRG ROM</th><td>32 KB</td></tr>
+              <tr><th>CHR ROM</th><td>8 KB — 256 BG + 256 sprite tiles</td></tr>
+              <tr><th>Output</th><td>iNES <code>.nes</code> + <code>.asm</code> + <code>.chr</code></td></tr>
+              <tr><th>Runs on</th><td>Mesen · FCEUX · EverDrive · jsnes</td></tr>
+            </tbody>
+          </table>
+
+          <table class="spec">
+            <caption>Picture</caption>
+            <tbody>
+              <tr><th>Resolution</th><td>256 × 240, one screen per room</td></tr>
+              <tr><th>Room grid</th><td>16 × 15 cells of 16 × 16 px</td></tr>
+              <tr><th>Palette</th><td>Full 64-color 2C02 master ($0D blocked)</td></tr>
+              <tr><th>Sub-palettes</th><td>4 BG + 4 sprite, one BG palette per cell</td></tr>
+              <tr><th>CHR</th><td>Automatic 8×8 tile dedup</td></tr>
+            </tbody>
+          </table>
+
+          <table class="spec">
+            <caption>Budgets (enforced live)</caption>
+            <tbody>
+              <tr><th>Rooms</th><td>≤ 24</td></tr>
+              <tr><th>Tiles</th><td>≤ 160</td></tr>
+              <tr><th>Sprites + items / room</th><td>≤ 15</td></tr>
+              <tr><th>Flags · Vars</th><td>≤ 16 · ≤ 8</td></tr>
+              <tr><th>Events · Custom SFX</th><td>≤ 128 · ≤ 32</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <p class="spec-foot">
+          Line up four sprites on one row and the editor warns you — that's the NES
+          eight-per-scanline limit talking, and it'll flicker on real silicon. Overrun
+          32 KB and the build stops. The constraints are the craft.
+        </p>
+      </section>
+
+      <!-- ============ FORMAT ============ -->
+      <section id="format" class="band alt">
+        <div class="band-head">
+          <h2>A game is a text file</h2>
+          <p>
+            Everything you draw round-trips to a line-oriented format on the
+            <strong>data</strong> tab. Readable, diffable, paste-able. Here's the top of
+            a small one:
+          </p>
+        </div>
+        <div class="code-wrap">
+          <pre class="code"><code>GAME my cave adventure
+VER 1
+START 0 7,7
+
+PAL 0
+BKG 0F
+BG0 21,11,30
+SP0 30,27,16
+
+TIL a
+NAME rock
+WALL true
+&lt;16 rows of 16 pixels, 0-3&gt;
+
+ROOM 0
+PAL 0
+&lt;15 rows of 16 tile ids&gt;
+EXT 15,7 1 0,7      ; exit -&gt; room 1
+END e 8,3          ; ending dialog e
+ITM k 3,9          ; item placement
+
+DLG c
+Meow. The cave is deeper than it looks.</code></pre>
+        </div>
+      </section>
+
+      <!-- ============ CTA ============ -->
+      <section class="cta">
+        <h2>Enough reading. Draw something.</h2>
+        <p>Open the editor and load the sample game — you'll have a ROM in a minute.</p>
+        <a class="btn primary big" data-editor-link href="/editor/">Open the Editor →</a>
+      </section>
+    </main>
+
+    <!-- ============ FOOTER ============ -->
+    <footer class="foot">
+      <div class="foot-cols">
+        <div>
+          <a class="nav-logo" href="#top">NES<em>ty</em></a>
+          <p class="foot-blurb">
+            A Bitsy-style editor for making real NES games. Open source, built on an
+            in-house 6502 assembler, engine and compiler.
+          </p>
+        </div>
+        <nav class="foot-nav">
+          <h4>Build</h4>
+          <a data-editor-link href="/editor/">Open the editor</a>
+          <a href="#pipeline">How it compiles</a>
+          <a href="#specs">Hardware specs</a>
+        </nav>
+        <nav class="foot-nav">
+          <h4>Project</h4>
+          <a data-repo href="#">Source (GitHub)</a>
+          <a href="#format">Game format</a>
+          <a href="https://make.bitsy.org" target="_blank" rel="noopener">Bitsy, the inspiration</a>
+        </nav>
+      </div>
+      <p class="foot-legal">
+        NESty is unaffiliated with Nintendo. NES is a trademark of its owner.
+        Made for the homebrew scene.
+      </p>
+    </footer>
+
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
