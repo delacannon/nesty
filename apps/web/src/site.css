@@ -386,11 +386,6 @@ h4 {
   box-shadow: 6px 6px 0 rgba(242, 131, 123, 0.35);
   border-color: var(--line-bright);
 }
-.card-ico {
-  font-size: 26px;
-  display: block;
-  margin-bottom: 12px;
-}
 .card h3 {
   font-size: 13px;
   margin: 0 0 12px;

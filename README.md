@@ -8,6 +8,16 @@ emulator. Download the `.nes` for any emulator or flash cart, and the generated 
 Same spirit as Bitsy: walk around, talk to people, pick up things, be somewhere. No physics —
 instant grid movement, one screen per room.
 
+## Screenshots
+
+| World editor | Sprites |
+| --- | --- |
+| ![World editor](apps/web/public/shots/editor-world.png) | ![Sprite editor](apps/web/public/shots/editor-sprites.png) |
+
+| Music | Dialog |
+| --- | --- |
+| ![Music editor](apps/web/public/shots/editor-music.png) | ![Dialog editor](apps/web/public/shots/editor-dialog.png) |
+
 ## Quick start
 
 ```sh

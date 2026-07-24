@@ -41,9 +41,13 @@ export function TopToolbar() {
 
   return (
     <div className='topbar'>
-      <div className='logo'>
+      <a
+        className='logo'
+        href={import.meta.env.DEV ? 'http://localhost:5174/' : '/'}
+        title='back to nesty.app'
+      >
         NES<em>TY</em>
-      </div>
+      </a>
       <input
         className='title-input'
         data-tour='title'

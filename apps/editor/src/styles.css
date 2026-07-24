@@ -94,10 +94,16 @@ canvas {
   font-family: var(--font-display);
   font-size: 12px;
   color: #fff;
+  text-decoration: none;
+  cursor: pointer;
   text-shadow: 1px 1px 0 var(--accent);
   letter-spacing: 1px;
   white-space: nowrap;
   user-select: none;
+}
+
+.logo:hover {
+  color: var(--accent-hi);
 }
 
 .logo em {
